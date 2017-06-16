@@ -13,8 +13,8 @@ namespace fish_gallery
             var configuration = new Configuration();
             var configurationPath = HttpContext.Current.Server.MapPath(@"~\Models\hibernate.cfg.xml");
             configuration.Configure(configurationPath);
-            var userConfigurationFile = HttpContext.Current.Server.MapPath(@"~\Mappings\User.hbm.xml");
-            configuration.AddFile(userConfigurationFile);
+            var fishGalleryConfigurationFile = HttpContext.Current.Server.MapPath(@"~\Mappings\FishGallery.hbm.xml");
+            configuration.AddFile(fishGalleryConfigurationFile);
             ISessionFactory sessionFactory = configuration.BuildSessionFactory();
             return sessionFactory.OpenSession();
         }

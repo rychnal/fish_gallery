@@ -48,6 +48,39 @@ namespace fish_gallery.Controllers
             
         }
 
+        public ActionResult Login()
+        {
+            return View();
+
+        }
+
+
+
+        [HttpPost]
+        public ActionResult Login(Users user)
+        {
+            using (ISession session = NHibernateSession.OpenSession())  // Open a session to conect to the database
+            {
+                //var userd = session.CreateQuery("from Users where Users.name = :name").SetParameter("name", user.Name).UniqueResult();
+                //var user_data = session.CreateSQLQuery("SELECT * FROM Users WHERE Users.name = :name").SetParameter("name", user.Name).UniqueResult(); //  Querying to get all the books
+                //Console.Write(user_data[0]);
+                var user_data = session.QueryOver<Users>()
+                    .Where(x => x.Name == user.Name).List();
+                Users user_info;
+                if (user_data != null)
+                {
+                    user_info = user_data[0];
+                    if (user_info.Password == user.Password)
+                    {
+                        Session["username"] = user.Name;
+                        return RedirectToAction("Gallery/Index");
+                    }
+                }
+               
+                
+            }
+            return View();
+        }
 
     }
 }

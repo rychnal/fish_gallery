@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" auto-import="true" assembly="fish_gallery" namespace="fish_gallery.Models">
+  <class name="Users" table="users" dynamic-update="true" >
+    <cache usage="read-write"/>
+    <id name="Id" column="Id" type="int">
+      <generator class="assigned" />
+    </id>
+
+    <property name="Name"  />
+    <property name="Email" />
+    <property name="Password" />
+   
+  </class>
+  <class name="Gallery" table="gallery" dynamic-update="true" >
+    <cache usage="read-write"/>
+    <id name="Id" column="Id" type="int">
+      <generator class="assigned" />
+    </id>
+
+    <property name="Name"  />
+    <property name="PublicGallery" />
+    <property name="Password" />
+    <property name="UserId"/>
+  </class>
+  <class name="Fish" table="fish" dynamic-update="true" >
+    <cache usage="read-write"/>
+    <id name="Id" column="Id" type="int">
+      <generator class="native" />
+    </id>
+
+    <property name="Name"  />
+    <property name="Weight" />
+    <property name="Length" />
+    <property name="GalleryId"/>
+  </class>
+  <class name="Image" table="image" dynamic-update="true" >
+    <cache usage="read-write"/>
+    <id name="Id" column="Id" type="int">
+      <generator class="assigned" />
+    </id>
+
+    <property name="Name"  />
+    <property name="FishId"/>
+  </class>
+  
+</hibernate-mapping>

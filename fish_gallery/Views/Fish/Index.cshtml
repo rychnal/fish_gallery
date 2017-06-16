@@ -1,4 +1,4 @@
-﻿@model IEnumerable<fish_gallery.Models.Users>
+﻿@model IEnumerable<fish_gallery.Models.Fish>
 
 @{
     ViewBag.Title = "View";
@@ -7,10 +7,7 @@
 <h2>View</h2>
 
 <p>
-    @Html.ActionLink("Registrace", "Create")
-</p>
-<p>
-    @Html.ActionLink("Přihlášení", "Login")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
@@ -18,10 +15,10 @@
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.Weight)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Password)
+            @Html.DisplayNameFor(model => model.Length)
         </th>
         <th></th>
     </tr>
@@ -32,10 +29,10 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Email)
+            @Html.DisplayFor(modelItem => item.Weight)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Password)
+            @Html.DisplayFor(modelItem => item.Length)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

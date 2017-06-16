@@ -128,11 +128,16 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\FishController.cs" />
+    <Compile Include="Controllers\GalleryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Fish.cs" />
+    <Compile Include="Models\Gallery.cs" />
+    <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="NhibernateSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -144,7 +149,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Mappings\User.hbm.xml">
+    <Content Include="Mappings\FishGallery.hbm.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Models\hibernate.cfg.xml">
@@ -181,6 +186,10 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Gallery\Index.cshtml" />
+    <Content Include="Views\Fish\Index.cshtml" />
+    <Content Include="Views\Fish\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
