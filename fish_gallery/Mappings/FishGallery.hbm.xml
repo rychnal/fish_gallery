@@ -3,7 +3,7 @@
   <class name="Users" table="users" dynamic-update="true" >
     <cache usage="read-write"/>
     <id name="Id" column="Id" type="int">
-      <generator class="assigned" />
+      <generator class="native" />
     </id>
 
     <property name="Name"  />
@@ -32,15 +32,17 @@
     <property name="Weight" />
     <property name="Length" />
     <property name="GalleryId"/>
+    
   </class>
   <class name="Image" table="image" dynamic-update="true" >
     <cache usage="read-write"/>
     <id name="Id" column="Id" type="int">
-      <generator class="assigned" />
+      <generator class="native" />
     </id>
 
     <property name="Name"  />
     <property name="FishId"/>
+    <many-to-one name="ImageToFish" class="Fish" column="Id"/>
   </class>
   
 </hibernate-mapping>

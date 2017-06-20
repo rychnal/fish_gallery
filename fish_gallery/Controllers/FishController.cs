@@ -19,7 +19,7 @@ namespace fish_gallery.Controllers
             using (ISession session = NHibernateSession.OpenSession())  // Open a session to conect to the database
             {
 
-                fishes = session.Query<Fish>().ToList(); //  Querying to get all the books
+                fishes = session.Query<Fish>().Where(x => x.GalleryId == id_gallery).ToList(); //  Querying to get all the books
             }
 
             return View(fishes);
@@ -29,7 +29,7 @@ namespace fish_gallery.Controllers
         // GET: Fish/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return RedirectToAction("Index", "Image", new { id_fish = id });
         }
 
         // GET: Fish/Create

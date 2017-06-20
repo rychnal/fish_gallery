@@ -73,7 +73,8 @@ namespace fish_gallery.Controllers
                     if (user_info.Password == user.Password)
                     {
                         Session["username"] = user.Name;
-                        return RedirectToAction("Gallery/Index");
+                        Session["user_id"] = user.Id;
+                        return RedirectToAction("Index","Gallery");
                     }
                 }
                
