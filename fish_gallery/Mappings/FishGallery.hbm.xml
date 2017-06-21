@@ -9,6 +9,7 @@
     <property name="Name"  />
     <property name="Email" />
     <property name="Password" />
+    <many-to-one name="UserImage" class="Image" column="Id"/>
    
   </class>
   <class name="Gallery" table="gallery" dynamic-update="true" >
@@ -32,17 +33,22 @@
     <property name="Weight" />
     <property name="Length" />
     <property name="GalleryId"/>
+    <many-to-one name="ImageToFish" class="Image" column="Id"/>
     
   </class>
   <class name="Image" table="image" dynamic-update="true" >
     <cache usage="read-write"/>
-    <id name="Id" column="Id" type="int">
-      <generator class="native" />
+    <id name="Id" type="int">
+      <column name="id" not-null="true"/>
+      <generator class="identity" />
     </id>
 
     <property name="Name"  />
     <property name="FishId"/>
-    <many-to-one name="ImageToFish" class="Fish" column="Id"/>
+    <property name="Extension"/>
+    
+    <many-to-one name="ImageUser" class="Users" column="UserId" />
+    
   </class>
   
 </hibernate-mapping>

@@ -12,5 +12,6 @@ namespace fish_gallery.Models
         public virtual float Weight { get; set; }
         public virtual float Length { get; set; }
         public virtual int GalleryId { get; set; }
+        public virtual object ImageToFish { get; set; }
     }
 }

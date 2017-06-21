@@ -7,6 +7,7 @@ using System.IO;
 using NHibernate;
 using NHibernate.Linq;
 using fish_gallery.Models;
+using NHibernate.Criterion;
 
 namespace fish_gallery.Controllers
 {
@@ -32,16 +33,13 @@ namespace fish_gallery.Controllers
             Image image;
             using (ISession session = NHibernateSession.OpenSession())  // Open a session to conect to the database
             {
-
                 image = session.QueryOver<Image>()
-                    .Where(x => x.Id == id).SingleOrDefault();
+                    .Where(x => x.Id == id).JoinQueryOver<Users>(i => i.ImageUser).SingleOrDefault();
 
-                var username = session.QueryOver<Image>().
-                    JoinQueryOver(f => f.ImageToFish).List();
-
-
-                
             }
+            string imagePath = "/Images/" + image.ImageUser.Name + "/" + image.Name + image.Extension;
+            image.imagePath = imagePath;
+            
             return View(image);
         }
 
@@ -125,10 +123,17 @@ namespace fish_gallery.Controllers
                         Directory.CreateDirectory(Server.MapPath("~/images/" + Session["username"]));
                     }
                     file.SaveAs(physicalPath);
+                    Users u = session.QueryOver<Users>()
+                    .Where(x => x.Id == int.Parse(Session["user_id"].ToString())).SingleOrDefault();
                     image.FishId = int.Parse(Session["id_fish"].ToString());
+                    image.ImageUser = u;//int.Parse(Session["user_id"].ToString());
+                    image.Name = ImageName;
+                    image.Extension = extension;
 
                     using (ITransaction transaction = session.BeginTransaction())
                     {
+                       // IQuery sqlQry = session.CreateSQLQuery("SET IDENTITY_INSERT image ON");
+                      //  object ret = sqlQry.UniqueResult();
                         session.Save(image);
                         transaction.Commit();
                     }
