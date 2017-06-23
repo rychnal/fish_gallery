@@ -74,13 +74,18 @@ namespace fish_gallery.Controllers
                     {
                         Session["username"] = user.Name;
                         Session["user_id"] = user_info.Id;
-                        return RedirectToAction("Index","Gallery");
+                        return RedirectToAction("Index","Gallery", new { id_user_gallery = user_info.Id });
                     }
                 }
                
                 
             }
             return View();
+        }
+
+        public ActionResult Details(int id)
+        {
+            return RedirectToAction("Index", "Gallery", new { id_user_gallery = id });
         }
 
     }

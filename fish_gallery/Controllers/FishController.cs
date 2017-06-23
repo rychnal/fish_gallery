@@ -19,7 +19,7 @@ namespace fish_gallery.Controllers
             using (ISession session = NHibernateSession.OpenSession())  // Open a session to conect to the database
             {
 
-                fishes = session.Query<Fish>().Where(x => x.GalleryId == id_gallery).ToList(); //  Querying to get all the books
+                fishes = session.Query<Fish>().Where(x => x.FishGallery.Id == id_gallery).ToList(); //  Querying to get all the books
             }
 
             return View(fishes);
@@ -42,16 +42,52 @@ namespace fish_gallery.Controllers
         [HttpPost]
         public ActionResult Create(Fish fish)
         {
-            try
-            {
+           
                 // TODO: Add insert logic here
                 using (ISession session = NHibernateSession.OpenSession())
                 {
                     using (ITransaction transaction = session.BeginTransaction())
                     {
-                        fish.GalleryId = int.Parse(Session["id_gallery"].ToString());
+                         Gallery gl = session.QueryOver<Gallery>()
+                         .Where(g => g.Id == int.Parse(Session["id_gallery"].ToString())).SingleOrDefault();
+                         fish.FishGallery = gl;
                         
                         session.Save(fish);
+                        transaction.Commit();
+                    }
+                }
+                return RedirectToAction("Index", "Fish", new { id_gallery = Session["id_gallery"] });
+          
+        }
+
+        // GET: Fish/Edit/5
+        public ActionResult Edit(int id)
+        {
+            using (ISession session = NHibernateSession.OpenSession())
+            {
+                var fish = session.Get<Fish>(id);
+                return View(fish);
+            }
+       
+        }
+
+        // POST: Fish/Edit/5
+        [HttpPost]
+        public ActionResult Edit(int id, Fish fish)
+        {
+            try
+            {
+                using (ISession session = NHibernateSession.OpenSession())
+                {
+                    var fishtoUpdate = session.Get<Fish>(id);
+
+                    fishtoUpdate.Name = fish.Name;
+                    fishtoUpdate.Weight = fish.Weight;
+                    fishtoUpdate.Length = fish.Length;
+
+                    using (ITransaction transaction = session.BeginTransaction())
+                    {
+                        session.Save(fishtoUpdate);
                         transaction.Commit();
                     }
                 }
@@ -63,32 +99,20 @@ namespace fish_gallery.Controllers
             }
         }
 
-        // GET: Fish/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Fish/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-                
-                    return RedirectToAction("Index", new { id_fish = Session["id_fish"]});
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         // GET: Fish/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete( Fish fh)
         {
-            return View();
+            using (ISession session = NHibernateSession.OpenSession())  // Open a session to conect to the database
+            {
+                using (ITransaction Transaction = session.BeginTransaction())
+                {
+                    session.Delete(fh);
+                    Transaction.Commit();
+                }
+
+
+            }
+            return RedirectToAction("Index", "Gallery", new { id_gallery = int.Parse(Session["uder_id"].ToString()) });
         }
 
         // POST: Fish/Delete/5

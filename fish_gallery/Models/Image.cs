@@ -9,7 +9,7 @@ namespace fish_gallery.Models
     {
         public virtual int Id { get; set; }
         public virtual string Name { get; set; }
-        public virtual int FishId { get; set; }
+        public virtual Fish ImageFish { get; set; }
         public virtual string Extension { get; set; }
         public virtual Users ImageUser { get; set; }
 

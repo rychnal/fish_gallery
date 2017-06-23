@@ -7,7 +7,10 @@
 <h2>View</h2>
 
 <p>
+@if (Session["username"] != null && Session["user_id_gallery"] != null && Session["user_id"].ToString() == Session["user_id_gallery"].ToString())
+{
     @Html.ActionLink("Create New", "Create")
+}
 </p>
 <table class="table">
     <tr>
@@ -35,9 +38,14 @@
             @Html.DisplayFor(modelItem => item.Length)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @if (Session["username"] != null && Session["user_id_gallery"] != null && Session["user_id"].ToString() == Session["user_id_gallery"].ToString()) { 
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) <span>|</span>
+            }
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @if (Session["username"] != null && Session["user_id_gallery"] != null && Session["user_id"].ToString() == Session["user_id_gallery"].ToString()) { 
+            
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            }
         </td>
     </tr>
 }

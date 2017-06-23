@@ -21,7 +21,7 @@ namespace fish_gallery.Controllers
             using (ISession session = NHibernateSession.OpenSession())  // Open a session to conect to the database
             {
 
-                fishes = session.Query<Image>().Where(x => x.FishId == id_fish).ToList(); //  Querying to get all the books
+                fishes = session.Query<Image>().Where(x => x.ImageFish.Id == id_fish).ToList(); //  Querying to get all the books
             }
 
             return View(fishes);
@@ -65,32 +65,22 @@ namespace fish_gallery.Controllers
             }
         }
 
-        // GET: Image/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Image/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
 
         // GET: Image/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Image im)
         {
-            return View();
+            using (ISession session = NHibernateSession.OpenSession())  // Open a session to conect to the database
+            {
+                using (ITransaction Transaction = session.BeginTransaction())
+                {
+                    session.Delete(im);
+                    Transaction.Commit();
+                }
+                    
+
+            }
+            return RedirectToAction("Index", "Image", new { id_fish = int.Parse(Session["id_fish"].ToString()) });
         }
 
         // POST: Image/Delete/5
@@ -116,7 +106,7 @@ namespace fish_gallery.Controllers
             {
                 using (ISession session = NHibernateSession.OpenSession())  // Open a session to conect to the database
                 {
-                    string ImageName = Path.GetFileName(image.Name);
+                    string ImageName = Path.GetFileName(image.Name).Replace(" ","_");
                     string extension = Path.GetExtension(file.FileName);
                     string physicalPath = Server.MapPath("~/images/" + Session["username"] + "/" + ImageName + extension);
                     if(!System.IO.File.Exists(Server.MapPath("~/images/" + Session["username"]))){
@@ -125,10 +115,13 @@ namespace fish_gallery.Controllers
                     file.SaveAs(physicalPath);
                     Users u = session.QueryOver<Users>()
                     .Where(x => x.Id == int.Parse(Session["user_id"].ToString())).SingleOrDefault();
-                    image.FishId = int.Parse(Session["id_fish"].ToString());
+                    Fish fh = session.QueryOver<Fish>()
+                    .Where(x => x.Id == int.Parse(Session["id_fish"].ToString())).SingleOrDefault();
+                    image.ImageFish = fh;
                     image.ImageUser = u;//int.Parse(Session["user_id"].ToString());
                     image.Name = ImageName;
                     image.Extension = extension;
+                    
 
                     using (ITransaction transaction = session.BeginTransaction())
                     {

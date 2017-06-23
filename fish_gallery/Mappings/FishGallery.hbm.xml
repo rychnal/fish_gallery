@@ -3,37 +3,36 @@
   <class name="Users" table="users" dynamic-update="true" >
     <cache usage="read-write"/>
     <id name="Id" column="Id" type="int">
-      <generator class="native" />
+      <generator class="identity" />
     </id>
 
     <property name="Name"  />
     <property name="Email" />
     <property name="Password" />
-    <many-to-one name="UserImage" class="Image" column="Id"/>
    
   </class>
   <class name="Gallery" table="gallery" dynamic-update="true" >
     <cache usage="read-write"/>
     <id name="Id" column="Id" type="int">
-      <generator class="assigned" />
+      <generator class="identity" />
     </id>
 
     <property name="Name"  />
     <property name="PublicGallery" />
     <property name="Password" />
     <property name="UserId"/>
+    <property name="Url"/>
   </class>
   <class name="Fish" table="fish" dynamic-update="true" >
     <cache usage="read-write"/>
     <id name="Id" column="Id" type="int">
-      <generator class="native" />
+      <generator class="identity" />
     </id>
 
     <property name="Name"  />
     <property name="Weight" />
     <property name="Length" />
-    <property name="GalleryId"/>
-    <many-to-one name="ImageToFish" class="Image" column="Id"/>
+    <many-to-one name="FishGallery" class="Gallery" column="GalleryId" />
     
   </class>
   <class name="Image" table="image" dynamic-update="true" >
@@ -44,10 +43,10 @@
     </id>
 
     <property name="Name"  />
-    <property name="FishId"/>
     <property name="Extension"/>
     
     <many-to-one name="ImageUser" class="Users" column="UserId" />
+    <many-to-one name="ImageFish" class="Fish" column="FishId" cascade="delete"/>
     
   </class>
   
