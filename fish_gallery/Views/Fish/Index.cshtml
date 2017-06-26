@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<fish_gallery.Models.Fish>
 
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = "FISH List";
 }
 
-<h2>View</h2>
+<h2>FISH List</h2>
 
 <p>
 @if (Session["username"] != null && Session["user_id_gallery"] != null && Session["user_id"].ToString() == Session["user_id_gallery"].ToString())
 {
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New Fish", "Create")
 }
 </p>
 <table class="table">

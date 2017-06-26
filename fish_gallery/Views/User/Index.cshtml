@@ -1,20 +1,20 @@
 ﻿@model IEnumerable<fish_gallery.Models.Users>
 
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = "Users List";
 }
 
 <h2>View</h2>
 @if (Session["username"] == null)
 {
     <p>
-        @Html.ActionLink("Registrace", "Create")
+        @Html.ActionLink("Registration", "Create")
     </p>
 }
 @if (Session["username"] == null)
 {
     <p>
-        @Html.ActionLink("Přihlášení", "Login")
+        @Html.ActionLink("Login", "Login")
     </p>
 }
 <table class="table">

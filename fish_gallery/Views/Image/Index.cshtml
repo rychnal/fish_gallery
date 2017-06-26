@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<fish_gallery.Models.Image>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Image List";
 }
 
-<h2>Index</h2>
+<h2>Image List</h2>
 
 <p>
     @if (Session["username"] != null && Session["user_id_gallery"] != null && Session["user_id"].ToString() == Session["user_id_gallery"].ToString())

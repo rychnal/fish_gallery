@@ -32,7 +32,7 @@
     <property name="Name"  />
     <property name="Weight" />
     <property name="Length" />
-    <many-to-one name="FishGallery" class="Gallery" column="GalleryId" />
+    <many-to-one name="FishGallery" class="Gallery" column="GalleryId" cascade="delete" />
     
   </class>
   <class name="Image" table="image" dynamic-update="true" >

@@ -48,6 +48,13 @@ namespace fish_gallery.Controllers
             
         }
 
+        public ActionResult Logout()
+        {
+            Session["username"] = null;
+            Session["user_id"] = null;
+            return RedirectToAction("Index", "User");
+        }
+
         public ActionResult Login()
         {
             return View();

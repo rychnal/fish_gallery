@@ -112,5 +112,20 @@ namespace fish_gallery.Controllers
 
         }
 
+        public ActionResult Delete(Gallery gl)
+        {
+            using (ISession session = NHibernateSession.OpenSession())  // Open a session to conect to the database
+            {
+                using (ITransaction Transaction = session.BeginTransaction())
+                {
+                    session.Delete(gl);
+                    Transaction.Commit();
+                }
+
+
+            }
+            return RedirectToAction("Index", "Gallery", new { id_user_gallery = Session["user_id"].ToString() });
+        }
+
     }
 }

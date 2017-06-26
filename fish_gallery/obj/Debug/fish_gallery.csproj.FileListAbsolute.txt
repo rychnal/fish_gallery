@@ -42,3 +42,4 @@ C:\Users\Lukas\Documents\Source\fish_gallery\fish_gallery\bin\Newtonsoft.Json.xm
 C:\Users\Lukas\Documents\Source\fish_gallery\fish_gallery\obj\Debug\fish_gallery.csprojResolveAssemblyReference.cache
 C:\Users\Lukas\Documents\Source\fish_gallery\fish_gallery\obj\Debug\fish_gallery.dll
 C:\Users\Lukas\Documents\Source\fish_gallery\fish_gallery\obj\Debug\fish_gallery.pdb
+C:\Users\Lukas\Documents\Source\fish_gallery\fish_gallery\bin\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll

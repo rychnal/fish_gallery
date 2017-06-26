@@ -112,7 +112,7 @@ namespace fish_gallery.Controllers
 
 
             }
-            return RedirectToAction("Index", "Gallery", new { id_gallery = int.Parse(Session["uder_id"].ToString()) });
+            return RedirectToAction("Index", "Fish", new { id_gallery = Session["id_gallery"] });
         }
 
         // POST: Fish/Delete/5

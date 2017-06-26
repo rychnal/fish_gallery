@@ -1,10 +1,10 @@
 ﻿@model fish_gallery.Models.Image
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create image fish";
 }
 
-<h2>Create</h2>
+<h2>Create image fish</h2>
 
 
 @using (Html.BeginForm("FileUpload", "Image", FormMethod.Post,
@@ -25,7 +25,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ImageFish.Id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2"><b>Image</b></div>
             <div class="col-md-10">
                 <input type="file" name="file" id="file" style="width: 100%;" /> <br />
             </div>
